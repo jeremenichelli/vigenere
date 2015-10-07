@@ -12,10 +12,26 @@
     var lowerReference = 'abcdefghijklmnopqrstuvwxyz',
         upperReference = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
 
-    var isalpha = function(string) {
-        return (/^[a-zA-Z]+$/).test(string);
+    /**
+     * Checks if string passed as parameter contains only letters
+     * @method isalpha
+     * @param {String} str
+     * @return {Boolean}
+     */
+    var isalpha = function(str) {
+        return (/^[a-zA-Z]+$/).test(str);
     };
 
+    /**
+     * Applies Vigenère encryption to a phrase given a word and a
+     * numeric flag passed as a the third argument, when flag is
+     * positive it ciphers, when negative it deciphers
+     * @method process
+     * @param {String} word
+     * @param {String} phrase
+     * @param {Number} flag
+     * @return {String} result
+     */
     var process = function(word, phrase, flag) {
         // check if arguments are correct
         if (typeof word !== 'string' || typeof phrase !== 'string') {
