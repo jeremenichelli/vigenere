@@ -57,8 +57,10 @@
                 ci %= 26;
                 // take cipher from lower or upper reference
                 result = lowerReference.indexOf(pos) === -1 ? result + upperReference[ci] : result + lowerReference[ci];
-                // reset word index it exceeds word length
+                // reset word index when it exceeds word length
                 wi = wi + 1 === wlen ? 0 : wi + 1;
+            } else {
+                result += pos;
             }
         }
 
