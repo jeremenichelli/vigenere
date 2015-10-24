@@ -78,10 +78,12 @@
      * gulp test
      */
     gulp.task('test', [ 'lint' ], function(done) {
-        return new karmaServer({
+        var server = new karmaServer({
             configFile: __dirname + '/test/karma.conf.js',
             singleRun: true
-        }, done).start();
+        }, done);
+
+        return server.start();
     });
 
     /*
