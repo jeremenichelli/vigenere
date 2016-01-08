@@ -1,25 +1,29 @@
 # vigenere
 
-JavaScript library to cipher and decipher strings using Vigènere encrypting method.
+JavaScript library to cipher and decipher strings using Vigènere encrypting method writeen in ES2015.
 
 ## Use
 
 As you might, or might not know, the Vigènere encryption receives a key word that will use in the arithmetical process of encryption and the phrase you want to cipher or decipher.
 
+To use it in your app, download the distribution file and import the module:
+
+```js
+import { cipher, decipher } from 'vigenere.js';
+```
 
 ### cipher
 
 ```js
-vigenere.cipher('lemon', 'Attack at dawn!');
-// result: 'Lxfopv ef rnhr!'
+cipher('lemon', 'Attack at dawn!');
+// returns 'Lxfopv ef rnhr!'
 ```
-
 
 ### decipher
 
 ```js
-vigenere.decipher('lemon', 'Lxfopv ef rnhr!');
-// result: 'Attack at dawn!'
+decipher('lemon', 'Lxfopv ef rnhr!');
+// returns 'Attack at dawn!'
 ```
 
 ## Reference

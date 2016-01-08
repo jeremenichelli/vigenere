@@ -1,147 +1,145 @@
-(function(root) {
-    'use strict';
+import { cipher, decipher } from '../src/vigenere.js';
 
-    describe('Primary access', function() {
-        it('vigenere available in global scope', function() {
-            expect(typeof root.vigenere).toBe('object');
-        });
-        it('vigenere.cipher available in global scope as a function', function() {
-            expect(typeof root.vigenere.cipher).toBe('function');
-        });
-        it('vigenere.decipher available in global scope as a function', function() {
-            expect(typeof root.vigenere.decipher).toBe('function');
-        });
+describe('Primary access', () => {
+    it('vigenere cipher available in global scope as a function', () => {
+        expect(typeof cipher).toBe('function');
     });
-    describe('Errors', function() {
-        it('when word is not a string', function() {
-            var error1,
-                error2;
-
-            // cipher
-            try {
-                vigenere.cipher(12345, 'phrase');
-            } catch (e) {
-                error1 = e;
-            }
-
-            // decipher
-            try {
-                vigenere.decipher(12345, 'phrase');
-            } catch (e) {
-                error2 = e;
-            }
-
-            expect(error1 instanceof Error).toBe(true);
-            expect(error2 instanceof Error).toBe(true);
-        });
-        it('when phrase is not a string', function() {
-            var error1,
-                error2;
-
-            // cipher
-            try {
-                vigenere.cipher('phrase', 12345);
-            } catch (e) {
-                error1 = e;
-            }
-
-            // decipher
-            try {
-                vigenere.decipher('phrase', 12345);
-            } catch (e) {
-                error2 = e;
-            }
-
-            expect(error1 instanceof Error).toBe(true);
-            expect(error2 instanceof Error).toBe(true);
-        });
-        it('when call with not enough arguments', function() {
-            var error1,
-                error2;
-
-            // cipher
-            try {
-                vigenere.cipher('phrase');
-            } catch (e) {
-                error1 = e;
-            }
-
-            // decipher
-            try {
-                vigenere.decipher('phrase');
-            } catch (e) {
-                error2 = e;
-            }
-
-            expect(error1 instanceof Error).toBe(true);
-            expect(error2 instanceof Error).toBe(true);
-        });
-        it('when word contains characters that are not letters', function() {
-            var error1,
-                error2;
-
-            // cipher
-            try {
-                vigenere.cipher('w0rd', 'phrase');
-            } catch (e) {
-                error1 = e;
-            }
-
-            // decipher
-            try {
-                vigenere.decipher('w0rd', 'phrase');
-            } catch (e) {
-                error2 = e;
-            }
-
-            expect(error1 instanceof Error).toBe(true);
-            expect(error2 instanceof Error).toBe(true);
-        });
+    it('vigenere decipher available in global scope as a function', () => {
+        expect(typeof decipher).toBe('function');
     });
-    describe('cipher', function() {
-        it('with all uppercase letters and no special characters', function() {
-            expect(vigenere.cipher('LEMON', 'ATTACKATDAWN')).toBe('LXFOPVEFRNHR');
-        });
-        it('with all uppercase letters and spaces', function() {
-            expect(vigenere.cipher('LEMON', 'ATTACK AT DAWN')).toBe('LXFOPV EF RNHR');
-        });
-        it('with all lowercase letters and no special characters', function() {
-            expect(vigenere.cipher('lemon', 'attackatdawn')).toBe('lxfopvefrnhr');
-        });
-        it('with lowercase letters and spaces', function() {
-            expect(vigenere.cipher('lemon', 'attack at dawn')).toBe('lxfopv ef rnhr');
-        });
-        it('with mix of upper and lowercase letters and special characters', function() {
-            expect(vigenere.cipher('lemon', 'Attack At daWn!')).toBe('Lxfopv Ef rnHr!');
-        });
-        it('with an empty string as a phrase returns an empty string', function() {
-            expect(vigenere.cipher('word', '')).toBe('');
-        });
-        it('produces same result with key word on lower or uppercase', function() {
-            expect(vigenere.cipher('lEmOn', 'ATTACK AT DAWN')).toBe('LXFOPV EF RNHR');
-        });
+});
+
+describe('Errors', () => {
+    it('when word is not a string', () => {
+        let error1,
+            error2;
+
+        // cipher
+        try {
+            cipher(12345, 'phrase');
+        } catch (e) {
+            error1 = e;
+        }
+
+        // decipher
+        try {
+            decipher(12345, 'phrase');
+        } catch (e) {
+            error2 = e;
+        }
+
+        expect(error1 instanceof Error).toBe(true);
+        expect(error2 instanceof Error).toBe(true);
     });
-    describe('decipher', function() {
-        it('with all uppercase letters and no special characters', function() {
-            expect(vigenere.decipher('LEMON', 'LXFOPVEFRNHR')).toBe('ATTACKATDAWN');
-        });
-        it('with all uppercase letters and spaces', function() {
-            expect(vigenere.decipher('LEMON', 'LXFOPV EF RNHR')).toBe('ATTACK AT DAWN');
-        });
-        it('with all lowercase letters and no special characters', function() {
-            expect(vigenere.decipher('lemon', 'lxfopvefrnhr')).toBe('attackatdawn');
-        });
-        it('with lowercase letters and spaces', function() {
-            expect(vigenere.decipher('lemon', 'lxfopv ef rnhr')).toBe('attack at dawn');
-        });
-        it('with mix of upper and lowercase letters and special characters', function() {
-            expect(vigenere.decipher('lemon', 'Lxfopv Ef rnHr!')).toBe('Attack At daWn!');
-        });
-        it('with an empty string as a phrase returns an empty string', function() {
-            expect(vigenere.decipher('word', '')).toBe('');
-        });
-        it('produces same result with key word on lower or uppercase', function() {
-            expect(vigenere.decipher('lEmOn', 'LXFOPV EF RNHR')).toBe('ATTACK AT DAWN');
-        });
+    it('when phrase is not a string', () => {
+        let error1,
+            error2;
+
+        // cipher
+        try {
+            cipher('phrase', 12345);
+        } catch (e) {
+            error1 = e;
+        }
+
+        // decipher
+        try {
+            decipher('phrase', 12345);
+        } catch (e) {
+            error2 = e;
+        }
+
+        expect(error1 instanceof Error).toBe(true);
+        expect(error2 instanceof Error).toBe(true);
     });
-})(this);
+    it('when call with not enough arguments', () => {
+        let error1,
+            error2;
+
+        // cipher
+        try {
+            cipher('phrase');
+        } catch (e) {
+            error1 = e;
+        }
+
+        // decipher
+        try {
+            decipher('phrase');
+        } catch (e) {
+            error2 = e;
+        }
+
+        expect(error1 instanceof Error).toBe(true);
+        expect(error2 instanceof Error).toBe(true);
+    });
+    it('when word contains characters that are not letters', () => {
+        let error1,
+            error2;
+
+        // cipher
+        try {
+            cipher('w0rd', 'phrase');
+        } catch (e) {
+            error1 = e;
+        }
+
+        // decipher
+        try {
+            decipher('w0rd', 'phrase');
+        } catch (e) {
+            error2 = e;
+        }
+
+        expect(error1 instanceof Error).toBe(true);
+        expect(error2 instanceof Error).toBe(true);
+    });
+});
+
+describe('cipher', () => {
+    it('with all uppercase letters and no special characters', () => {
+        expect(cipher('LEMON', 'ATTACKATDAWN')).toEqual('LXFOPVEFRNHR');
+    });
+    it('with all uppercase letters and spaces', () => {
+        expect(cipher('LEMON', 'ATTACK AT DAWN')).toEqual('LXFOPV EF RNHR');
+    });
+    it('with all lowercase letters and no special characters', () => {
+        expect(cipher('lemon', 'attackatdawn')).toEqual('lxfopvefrnhr');
+    });
+    it('with lowercase letters and spaces', () => {
+        expect(cipher('lemon', 'attack at dawn')).toEqual('lxfopv ef rnhr');
+    });
+    it('with mix of upper and lowercase letters and special characters', () => {
+        expect(cipher('lemon', 'Attack At daWn!')).toEqual('Lxfopv Ef rnHr!');
+    });
+    it('with an empty string as a phrase returns an empty string', () => {
+        expect(cipher('word', '')).toEqual('');
+    });
+    it('produces same result with key word on lower or uppercase', () => {
+        expect(cipher('lEmOn', 'ATTACK AT DAWN')).toEqual('LXFOPV EF RNHR');
+    });
+});
+
+describe('decipher', () => {
+    it('with all uppercase letters and no special characters', () => {
+        expect(decipher('LEMON', 'LXFOPVEFRNHR')).toEqual('ATTACKATDAWN');
+    });
+    it('with all uppercase letters and spaces', () => {
+        expect(decipher('LEMON', 'LXFOPV EF RNHR')).toEqual('ATTACK AT DAWN');
+    });
+    it('with all lowercase letters and no special characters', () => {
+        expect(decipher('lemon', 'lxfopvefrnhr')).toEqual('attackatdawn');
+    });
+    it('with lowercase letters and spaces', () => {
+        expect(decipher('lemon', 'lxfopv ef rnhr')).toEqual('attack at dawn');
+    });
+    it('with mix of upper and lowercase letters and special characters', () => {
+        expect(decipher('lemon', 'Lxfopv Ef rnHr!')).toEqual('Attack At daWn!');
+    });
+    it('with an empty string as a phrase returns an empty string', () => {
+        expect(decipher('word', '')).toEqual('');
+    });
+    it('produces same result with key word on lower or uppercase', () => {
+        expect(decipher('lEmOn', 'LXFOPV EF RNHR')).toEqual('ATTACK AT DAWN');
+    });
+});
