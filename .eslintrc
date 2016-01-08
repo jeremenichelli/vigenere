@@ -35,7 +35,6 @@
     "valid-typeof": 2,
     "no-shadow-restricted-names": 0,
 
-
     ////////// Best Practices //////////
 
     "block-scoped-var": 2,
